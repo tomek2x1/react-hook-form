@@ -115,7 +115,7 @@ const App = () => {
       return `
       <h5>Produkt ${index + 1}</h5>
       <b>Producent:</b> ${product.producer} <br/>
-      <b>Nazwa produktu:</b> ${product.typeProduct} <br/>
+      <b>Nazwa produktu:</b> ${product.productName} <br/>
       <b>Ilość:</b> ${product.quantity} <br/>
       <br/>
         `;
