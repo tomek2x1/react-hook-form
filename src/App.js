@@ -1,30 +1,43 @@
 import { useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./App.css";
+import ReactTooltip from "react-tooltip";
 
 const schema = yup.object({
   firstName: yup.string().required(),
-  userEmail: yup.string().required().matches(/^[a-z\d]+[\w\d.-]*@(?:[a-z\d]+[a-z\d-]+\.){1,5}[a-z]{2,6}$/i),
-  userPhone: yup.string().required().matches(/^[0-9\+]{8,13}$/),
+  userEmail: yup
+    .string()
+    .required()
+    .matches(/^[a-z\d]+[\w\d.-]*@(?:[a-z\d]+[a-z\d-]+\.){1,5}[a-z]{2,6}$/i),
+  userPhone: yup
+    .string()
+    .required()
+    .matches(/^[0-9\+]{8,13}$/),
   placeBuy: yup.string().required(),
   orderNumber: yup.string().required(),
   payType: yup.string().required(),
-  accountNumber: yup.string().when('payType', {
-    is: "Inny sposób", 
-    then: yup.string().required().matches(/^[0-9]{26}$/),
+  accountNumber: yup.string().when("payType", {
+    is: "Inny sposób",
+    then: yup
+      .string()
+      .required()
+      .matches(/^[0-9]{26}$/),
   }),
   reason: yup.string().required(),
-  products:yup.array().of(
+  products: yup.array().of(
     yup.object().shape({
       productName: yup.string().required("test"),
       producer: yup.string().required(),
       quantity: yup.number().required(),
     })
   ),
-  rodo:yup.boolean().oneOf([true], "Zgoda jest wymagana").required("Zgoda jest wymagana"),
-})
+  rodo: yup
+    .boolean()
+    .oneOf([true], "Zgoda jest wymagana")
+    .required("Zgoda jest wymagana"),
+});
 
 const App = () => {
   const {
@@ -35,15 +48,15 @@ const App = () => {
     watch,
     control,
   } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   });
 
-  const { fields, append, remove,} = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "products",
   });
 
-  useEffect(() => append({productName:"", producer:"", quantity:1}), [])
+  useEffect(() => append({ productName: "", producer: "", quantity: 1 }), []);
 
   const placeBuyArray = [
     "Sklep internetowy (www.emultimax.pl)",
@@ -66,21 +79,21 @@ const App = () => {
   ];
 
   const producerArray = [
-    "Blaupunkt", 
-    "Climative", 
-    "Danfoss", 
-    "Devi", 
-    "Digitime", 
-    "Dimplex", 
-    "Ebeco", 
-    "Eberle", 
-    "Emko", 
-    "Esco", 
-    "Nexans", 
-    "Rotenso", 
-    "Sonniger", 
-    "Thermoval", 
-    "Vaco", 
+    "Blaupunkt",
+    "Climative",
+    "Danfoss",
+    "Devi",
+    "Digitime",
+    "Dimplex",
+    "Ebeco",
+    "Eberle",
+    "Emko",
+    "Esco",
+    "Nexans",
+    "Rotenso",
+    "Sonniger",
+    "Thermoval",
+    "Vaco",
     "Warmtec",
     "Inny",
   ];
@@ -110,7 +123,7 @@ const App = () => {
   });
 
   const onSubmit = (data) => {
-    console.log("cs")
+    console.log("cs");
     const products = data.products.map((product, index) => {
       return `
       <h5>Produkt ${index + 1}</h5>
@@ -155,7 +168,6 @@ const App = () => {
 
     console.log("body", body);
 
-
     fetch(url, {
       method: "POST",
       headers: {
@@ -180,9 +192,7 @@ const App = () => {
         // setShowError(true);
         console.log(error);
       });
-
   };
-
 
   return (
     <div className="App">
@@ -367,23 +377,24 @@ const App = () => {
           ) : null}
           <h2 className="form-subtitle">Zwracany produkt</h2>
 
-
           {fields.map((field, index) => (
             <div className="form-product-card" key={index}>
-
               <div className="form-product-header">
-                <div className="form-product-name">
-                  Produkt {index + 1}
-                </div>
-                {
-                  index !== 0 ?
-                  <span className="form-product-remove" onClick={() => remove(index)}>x</span>
-                  : null
-                }
-
+                <div className="form-product-name">Produkt {index + 1}</div>
+                {index !== 0 ? (
+                  <span
+                    className="form-product-remove"
+                    onClick={() => remove(index)}
+                  >
+                    x
+                  </span>
+                ) : null}
               </div>
               <div className="form-product-body">
-                <label htmlFor={`products[${index}].producer`} className="form-label">
+                <label
+                  htmlFor={`products[${index}].producer`}
+                  className="form-label"
+                >
                   Producent:
                   <select
                     className="form-field"
@@ -403,35 +414,50 @@ const App = () => {
                   )}
                 </label>
 
-                <label htmlFor={`products[${index}].productName`} className="form-label">
-                  Nazwa produktu:
+                <label
+                  htmlFor={`products[${index}].productName`}
+                  className="form-label"
+                >
+                  <div className="form-tooltip-wrapper">
+                    Nazwa produktu:{" "}
+                    <div
+                      className="form-tooltip-btn"
+                      data-tip="Prosimy o przepisanie nazwy produktu z faktury lub maila potwierdzającego zamówienie"
+                    >
+                      i
+                    </div>
+                    <ReactTooltip />
+                  </div>
                   <input
                     type="text"
                     className="form-field"
                     id={`products[${index}].productName`}
                     name={`products[${index}].productName`}
-                    {...register(`products[${index}].productName`, { required: true })}
+                    {...register(`products[${index}].productName`, {
+                      required: true,
+                    })}
                   />
                   {errors?.products?.[index]?.producer?.message && (
-                    <span className="form-error">
-                      Podaj nazwę produktu
-                    </span>
+                    <span className="form-error">Podaj nazwę produktu</span>
                   )}
                 </label>
 
-                <label htmlFor={`products[${index}].quantity`} className="form-label">
+                <label
+                  htmlFor={`products[${index}].quantity`}
+                  className="form-label"
+                >
                   Ilość sztuk:
                   <input
                     type="number"
                     className="form-field"
                     id={`products[${index}].quantity`}
                     name={`products[${index}].quantity`}
-                    {...register(`products[${index}].quantity`, { required: true })}
+                    {...register(`products[${index}].quantity`, {
+                      required: true,
+                    })}
                   />
                   {errors?.products?.[index]?.producer?.message && (
-                    <span className="form-error">
-                      Podaj nazwę produktu
-                    </span>
+                    <span className="form-error">Podaj nazwę produktu</span>
                   )}
                 </label>
               </div>
@@ -439,40 +465,58 @@ const App = () => {
           ))}
           <div className="form__buttons-wrapper">
             <div className="form-btn-wrapper">
-              <button className="form-btn form-btn--add" onClick={() => append({productName:"", producer:"", quantity:1})}>Dodaj pozycję</button>
+              <button
+                className="form-btn form-btn--add"
+                onClick={() =>
+                  append({ productName: "", producer: "", quantity: 1 })
+                }
+              >
+                Dodaj pozycję
+              </button>
             </div>
           </div>
 
           <label htmlFor="rodo" className="form-label">
             <div className="form-checkbox-wrapper">
               <input
-                  type="checkbox"
-                  className="form-field-checkbox"
-                  id="rodo"
-                  name="rodo"
-                  {...register("rodo", {
-                    required: true,
-                  })}
-                />
-                <span className="form-checkbox-text">
-                Wyrażam zgodę na przetwarzanie moich danych osobowych przez P.W. MULTIMAX Damian Chwiejczak, ul. Peowiaków 9, 22-400 Zamość, przetwarzanych do celów związanych z reklamacją lub zwrotem towaru.
+                type="checkbox"
+                className="form-field-checkbox"
+                id="rodo"
+                name="rodo"
+                {...register("rodo", {
+                  required: true,
+                })}
+              />
+              <span className="form-checkbox-text">
+                Wyrażam zgodę na przetwarzanie moich danych osobowych przez P.W.
+                MULTIMAX Damian Chwiejczak, ul. Peowiaków 9, 22-400 Zamość,
+                przetwarzanych do celów związanych z reklamacją lub zwrotem
+                towaru.
                 {errors.rodo?.message && (
-                    <div className="form-error">
-                      Zgoda jest wymagana
-                    </div>
-                  )}
-                </span>
-              </div>
-            </label>
+                  <div className="form-error">Zgoda jest wymagana</div>
+                )}
+              </span>
+            </div>
+          </label>
 
-            <div className="form-btn-wrapper">
-              <button type="submit" className="form-btn form-btn-submit">Wyślij formularz</button>
-              </div>
+          <div className="form-btn-wrapper">
+            <button type="submit" className="form-btn form-btn-submit">
+              Wyślij formularz
+            </button>
+          </div>
 
           <div className="form-footer">
             <div>Klauzula informacyjna RODO:</div>
-            Administratorem Państwa danych osobowych jest P.W. MULTIMAX Damian Chwiejczak, ul. Peowiaków 9, 22-400 Zamość. Dane osobowe będą przetwarzane do celów związanych z reklamacją lub zwrotem towaru.{" "}
-            <a className="form-footer-link" href="https://emultimax.pl/regulaminy/obowiazek-informacyjny-emultimax-zwroty-reklamacje.pdf" target="_blank">Zobacz szczegóły</a>
+            Administratorem Państwa danych osobowych jest P.W. MULTIMAX Damian
+            Chwiejczak, ul. Peowiaków 9, 22-400 Zamość. Dane osobowe będą
+            przetwarzane do celów związanych z reklamacją lub zwrotem towaru.{" "}
+            <a
+              className="form-footer-link"
+              href="https://emultimax.pl/regulaminy/obowiazek-informacyjny-emultimax-zwroty-reklamacje.pdf"
+              target="_blank"
+            >
+              Zobacz szczegóły
+            </a>
           </div>
         </div>
       </form>

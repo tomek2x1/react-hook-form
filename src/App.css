@@ -23,18 +23,18 @@
 .form-subtitle {
   font-size: 20px;
   margin-top: 35px;
-  margin-bottom:5px;
+  margin-bottom: 5px;
 }
 
-.form-product-card{
+.form-product-card {
   background-color: #ffffff;
-  margin-bottom:10px;
-  margin-top:10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-.form-product-header{
+.form-product-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,11 +45,11 @@
   border-top-right-radius: 5px;
 }
 
-.form-product-body{
+.form-product-body {
   padding: 5px 20px 20px 20px;
 }
 
-.form-product-name{
+.form-product-name {
   font-weight: bold;
 }
 
@@ -84,7 +84,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -130,7 +130,7 @@ input[type=number] {
   border-color: #ff9300;
 }
 
-.form-btn-submit{
+.form-btn-submit {
   padding: 8px 10px;
   font-size: 15px;
   font-weight: 700;
@@ -145,50 +145,69 @@ input[type=number] {
 }
 
 .form-product-remove {
-  width:20px;
+  width: 20px;
   height: 20px;
-  border:1px solid transparent;
-  border-radius:50%;
-  cursor:pointer;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:0;
-  margin:0;
-  color:#000;
+  padding: 0;
+  margin: 0;
+  color: #000;
   background-color: transparent;
 }
 
 .form-product-remove:hover {
-  color:#fff;
+  color: #fff;
   background-color: #ff0000;
 }
 
-.form-checkbox-wrapper{
+.form-tooltip-wrapper {
   display: flex;
-  flex-wrap:nowrap;
-  cursor:pointer;
-  margin-bottom:20px;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
-.form-checkbox-text{
-  font-size:12px;
+.form-tooltip-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: #333;
+  color: #fff;
+  font-size: 7px;
+  margin-left: 5px;
+}
+
+.form-checkbox-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.form-checkbox-text {
+  font-size: 12px;
   text-align: justify;
-  padding-left:5px;
+  padding-left: 5px;
 }
 
-.form-submit-wrapper{
+.form-submit-wrapper {
   display: flex;
   justify-content: flex-end;
 }
 
-.form-footer{
-  margin-top:20px;
-  font-size:10px;
+.form-footer {
+  margin-top: 20px;
+  font-size: 10px;
   text-align: justify;
 }
 
-.form-footer-link{
+.form-footer-link {
   text-decoration: none;
   color: #ff4e09;
 }
