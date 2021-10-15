@@ -104,7 +104,7 @@ const Form = ({
 
   const placeBuyOptions = placeBuyArray.map((place, index) => {
     return (
-      <option key={index} value={place}>
+      <option key={index} value={place} className="form-option">
         {place}
       </option>
     );
@@ -112,7 +112,7 @@ const Form = ({
 
   const reasonOptions = reasonArray.map((reason, index) => {
     return (
-      <option key={index} value={reason}>
+      <option key={index} value={reason} className="form-option">
         {reason}
       </option>
     );
@@ -120,7 +120,7 @@ const Form = ({
 
   const producerOptions = producerArray.map((producer, index) => {
     return (
-      <option key={index} value={producer}>
+      <option key={index} value={producer} className="form-option">
         {producer}
       </option>
     );
@@ -203,7 +203,7 @@ const Form = ({
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-wrapper">
           <h1 className="form-title">Formularz zwrotu</h1>
-          <h2 className="form-subtitle">Dane klienta</h2>
+          <h2 className="form-subtitle form-subtitle-first">Dane klienta</h2>
           <label htmlFor="userName" className="form-label">
             Imię i nazwisko lub nazwa firmy:
             <span className="form-star">*</span>
@@ -271,7 +271,7 @@ const Form = ({
                 required: true,
               })}
             >
-              <option value="" defaultValue readOnly>
+              <option value="" defaultValue readOnly className="form-option">
                 Wybierz
               </option>
               {placeBuyOptions}
@@ -314,11 +314,15 @@ const Form = ({
                 required: true,
               })}
             >
-              <option value="" defaultValue readOnly>
+              <option value="" defaultValue readOnly className="form-option">
                 Wybierz
               </option>
-              <option value="Przelew">Przelew</option>
-              <option value="Inny sposób">Inny sposób</option>
+              <option value="Przelew" className="form-option">
+                Przelew
+              </option>
+              <option value="Inny sposób" className="form-option">
+                Inny sposób
+              </option>
             </select>
             {errors.payType?.type === "required" && (
               <span className="form-error">
@@ -360,7 +364,7 @@ const Form = ({
                 required: true,
               })}
             >
-              <option value="" defaultValue readOnly>
+              <option value="" defaultValue readOnly className="form-option">
                 Wybierz
               </option>
               {reasonOptions}
@@ -410,7 +414,12 @@ const Form = ({
                       required: true,
                     })}
                   >
-                    <option value="" defaultValue readOnly>
+                    <option
+                      value=""
+                      defaultValue
+                      readOnly
+                      className="form-option"
+                    >
                       Wybierz
                     </option>
                     {producerOptions}
@@ -432,7 +441,7 @@ const Form = ({
                     >
                       i
                     </div>
-                    <ReactTooltip />
+                    <ReactTooltip className="form-tooltip-component" />
                   </div>
                   <input
                     type="text"
