@@ -1,4 +1,4 @@
-const MsgSuccess = () => {
+const MsgSuccess = ({ taskNumber }) => {
   return (
     <div className="message-wrapper">
       <div className="message-wrapper-container">
@@ -6,7 +6,7 @@ const MsgSuccess = () => {
           Formularz został wysłany poprawnie
         </h2>
         <h3 className="message-wrapper-id">
-          Numer Twojego zgłoszenia: <span>{"taskNumber"}</span>
+          Numer Twojego zgłoszenia: <span>{taskNumber}</span>
         </h3>
         <p className="message-wrapper-remember">
           * Potwierdzenie wysłania formularza znajdziesz na swojej skrzynce
