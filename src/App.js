@@ -44,7 +44,6 @@ const App = () => {
     register,
     formState: { errors },
     handleSubmit,
-    getValues,
     watch,
     control,
   } = useForm({
@@ -123,7 +122,6 @@ const App = () => {
   });
 
   const onSubmit = (data) => {
-    console.log("cs");
     const products = data.products.map((product, index) => {
       return `
       <h5>Produkt ${index + 1}</h5>
@@ -202,6 +200,7 @@ const App = () => {
           <h2 className="form-subtitle">Dane klienta</h2>
           <label htmlFor="userName" className="form-label">
             Imię i nazwisko lub nazwa firmy:
+            <span className="form-star">*</span>
             <input
               type="text"
               className="form-field"
@@ -216,7 +215,7 @@ const App = () => {
             )}
           </label>
           <label htmlFor="userEmail" className="form-label">
-            Adres e-mail:
+            Adres e-mail:<span className="form-star">*</span>
             <input
               type="text"
               className="form-field"
@@ -236,7 +235,7 @@ const App = () => {
             )}
           </label>
           <label htmlFor="userPhone" className="form-label">
-            Telefon:
+            Telefon:<span className="form-star">*</span>
             <input
               type="number"
               className="form-field"
@@ -257,7 +256,7 @@ const App = () => {
           </label>
           <h2 className="form-subtitle">Dane zamówienia</h2>
           <label htmlFor="placeBuy" className="form-label">
-            Miejsce zakupu:
+            Miejsce zakupu:<span className="form-star">*</span>
             <select
               className="form-field"
               id="placeBuy"
@@ -285,6 +284,7 @@ const App = () => {
           ) : null}
           <label htmlFor="orderNumber" className="form-label">
             Numer zamówienia lub numer faktury:
+            <span className="form-star">*</span>
             <input
               type="text"
               className="form-field"
@@ -299,7 +299,7 @@ const App = () => {
             )}
           </label>
           <label htmlFor="payType" className="form-label">
-            Sposób płatności za zamówienie:
+            Sposób płatności za zamówienie:<span className="form-star">*</span>
             <select
               className="form-field"
               id="payType"
@@ -322,7 +322,7 @@ const App = () => {
           </label>
           {watch("payType") === "Inny sposób" ? (
             <label htmlFor="accountNumber" className="form-label">
-              Numer konta:
+              Numer konta bankowego:<span className="form-star">*</span>
               <input
                 type="number"
                 className="form-field"
@@ -334,7 +334,7 @@ const App = () => {
                 })}
               />
               {errors.accountNumber?.type === "required" && (
-                <span className="form-error">Podaj numer konta</span>
+                <span className="form-error">Podaj numer konta bankowego</span>
               )}
               {errors.accountNumber?.type === "pattern" && (
                 <span className="form-error">
@@ -345,7 +345,7 @@ const App = () => {
           ) : null}
 
           <label htmlFor="reason" className="form-label">
-            Powód odstąpienia:
+            Powód odstąpienia:<span className="form-star">*</span>
             <select
               className="form-field"
               id="reason"
@@ -395,7 +395,7 @@ const App = () => {
                   htmlFor={`products[${index}].producer`}
                   className="form-label"
                 >
-                  Producent:
+                  Producent:<span className="form-star">*</span>
                   <select
                     className="form-field"
                     id={`products[${index}].producer`}
@@ -419,7 +419,7 @@ const App = () => {
                   className="form-label"
                 >
                   <div className="form-tooltip-wrapper">
-                    Nazwa produktu:{" "}
+                    Nazwa produktu:<span className="form-star">*</span>{" "}
                     <div
                       className="form-tooltip-btn"
                       data-tip="Prosimy o przepisanie nazwy produktu z faktury lub maila potwierdzającego zamówienie"
@@ -446,7 +446,7 @@ const App = () => {
                   htmlFor={`products[${index}].quantity`}
                   className="form-label"
                 >
-                  Ilość sztuk:
+                  Ilość sztuk:<span className="form-star">*</span>
                   <input
                     type="number"
                     className="form-field"
@@ -491,7 +491,7 @@ const App = () => {
                 Wyrażam zgodę na przetwarzanie moich danych osobowych przez P.W.
                 MULTIMAX Damian Chwiejczak, ul. Peowiaków 9, 22-400 Zamość,
                 przetwarzanych do celów związanych z reklamacją lub zwrotem
-                towaru.
+                towaru.<span className="form-star">*</span>
                 {errors.rodo?.message && (
                   <div className="form-error">Zgoda jest wymagana</div>
                 )}
