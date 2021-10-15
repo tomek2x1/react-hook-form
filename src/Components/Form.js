@@ -513,6 +513,7 @@ const Form = () => {
               className="form-footer-link"
               href="https://emultimax.pl/regulaminy/obowiazek-informacyjny-emultimax-zwroty-reklamacje.pdf"
               target="_blank"
+              rel="noreferrer"
             >
               Zobacz szczegóły
             </a>
