@@ -110,12 +110,79 @@ const App = () => {
   });
 
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    console.log("cs")
+    const products = data.products.map((product, index) => {
+      return `
+      <h5>Produkt ${index + 1}</h5>
+      <b>Producent:</b> ${product.producer} <br/>
+      <b>Nazwa produktu:</b> ${product.typeProduct} <br/>
+      <b>Ilość:</b> ${product.quantity} <br/>
+      <br/>
+        `;
+    });
+
+    const url = "https://newaccount1632792215290.freshdesk.com/api/v2/tickets";
+    const body = {
+      subject: "Formularz zwrotu (online)",
+      description: `
+      <b>Imię i nazwisko lub nazwa firmy:</b> ${data.firstName} <br/>
+      <b>Adres e-mail:</b> ${data.userEmail} <br/>
+      <b>Telefon:</b> ${data.userPhone} <br/>
+      <br/>
+      <b>Miejsce zakupu:</b> ${data.placeBuy} <br/>
+      <b>Numer zamówienia lub numer faktury:</b> ${data.orderNumber} <br/>
+      <b>Sposób płatności za zamówienie:</b> ${data.payType} <br/>
+      ${
+        data.payType !== "Przelew"
+          ? `<b>Numer rachunku bankowego:</b> ${data.accountNumber} <br/>`
+          : ""
+      }
+      <br/>
+      <b>Powód odstąpienia:</b> ${data.reason} <br/>
+      ${
+        data.anotherReason
+          ? `<b>Dlaczego odstępuję:</b> ${data.anotherReason} <br/>`
+          : ""
+      }
+      <br/>
+      ${products}
+      `,
+      email: data.userEmail,
+      phone: data.userPhone,
+      priority: 1,
+      status: 2,
+    };
+
+    console.log("body", body);
+
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: "VHE3djNOUEFwUWFSNXhscG80Zg==",
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then(function (data) {
+        if (data.id) {
+          // setShowSpinner(false);
+          // setShowSuccess(true);
+          // setTaskNumber(data.id);
+        } else {
+          // setShowSpinner(false);
+          // setShowError(true);
+        }
+      })
+      .catch(function (error) {
+        // setShowSpinner(false);
+        // setShowError(true);
+        console.log(error);
+      });
+
   };
 
-    // const handleSubmitForm = (data) => {
-    //   console.log(data)
-    // }
 
   return (
     <div className="App">
@@ -399,7 +466,7 @@ const App = () => {
             </label>
 
             <div className="form-btn-wrapper">
-              <button type="submit" className="form-btn form-btn-submit" onClick={()=>{console.log(getValues())}}>Wyślij formularz</button>
+              <button type="submit" className="form-btn form-btn-submit">Wyślij formularz</button>
               </div>
 
           <div className="form-footer">
