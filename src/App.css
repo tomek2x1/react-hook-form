@@ -7,7 +7,6 @@
   max-width: 800px;
   width: 100%;
   background-color: #ececec;
-  border-radius: 15px;
   padding: 40px 30px 10px;
   margin: 30px auto;
 }
@@ -23,16 +22,39 @@
 
 .form-subtitle {
   font-size: 20px;
-  margin-top: 30px;
+  margin-top: 35px;
+  margin-bottom:5px;
 }
 
-.form-textfields {
-  background-color: #fff;
+.form-product-card{
+  background-color: #ffffff;
+  margin-bottom:10px;
+  margin-top:10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.form-product-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #dfdfdf; */
+  background-color: #dfdfdf;
+  padding: 10px 20px 15px 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.form-product-body{
+  padding: 5px 20px 20px 20px;
+}
+
+.form-product-name{
+  font-weight: bold;
 }
 
 .form-label {
   display: block;
-  font-weight: 300;
   margin-top: 10px;
 }
 
@@ -54,11 +76,22 @@
   font-weight: 400;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .form-error {
   color: #ff4e09;
   font-size: 10px;
   font-family: "SamsungOne", arial;
-  margin-left: 5px;
 }
 
 .form-warning {
@@ -68,20 +101,16 @@
   text-align: justify;
 }
 
-.form__buttons-wrapper {
-  border: 1px solid transparent;
-}
-
 .form__buttons-wrapper-warning {
   border-color: #ff4e09;
 }
 
-.form__btn-wrapper {
+.form-btn-wrapper {
   display: flex;
   justify-content: flex-end;
 }
 
-.form__btn {
+.form-btn {
   background: #ff4e09;
   background: linear-gradient(90deg, #ff4e09 0%, #ff7c00 100%);
   border: none;
@@ -95,29 +124,71 @@
   margin-bottom: 10px;
 }
 
-.form__btn:hover {
+.form-btn:hover {
   background: #ff9300;
   background: linear-gradient(90deg, #ff9300 0%, #ff9300 100%);
   border-color: #ff9300;
 }
 
-.form__btn--add {
-  background: #4bb94b;
-  margin-right: 10px;
+.form-btn-submit{
+  padding: 8px 10px;
+  font-size: 15px;
+  font-weight: 700;
 }
 
-.form__btn--add:hover {
+.form-btn--add {
+  background: #4bb94b;
+}
+
+.form-btn--add:hover {
   background: #338333;
 }
 
-.form__btn--remove {
-  background: #ff4e4e;
+.form-product-remove {
+  width:20px;
+  height: 20px;
+  border:1px solid transparent;
+  border-radius:50%;
+  cursor:pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:0;
+  margin:0;
+  color:#000;
+  background-color: transparent;
 }
 
-.form__btn--remove:hover {
-  background: #ff0000;
+.form-product-remove:hover {
+  color:#fff;
+  background-color: #ff0000;
 }
 
-.form__btn--remove:disabled {
-  background: #efefef;
+.form-checkbox-wrapper{
+  display: flex;
+  flex-wrap:nowrap;
+  cursor:pointer;
+  margin-bottom:20px;
+}
+
+.form-checkbox-text{
+  font-size:12px;
+  text-align: justify;
+  padding-left:5px;
+}
+
+.form-submit-wrapper{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-footer{
+  margin-top:20px;
+  font-size:10px;
+  text-align: justify;
+}
+
+.form-footer-link{
+  text-decoration: none;
+  color: #ff4e09;
 }
