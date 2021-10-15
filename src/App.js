@@ -18,7 +18,15 @@ const App = () => {
 
   return (
     <div className="App">
-      {showForm ? <Form /> : null}
+      {showForm ? (
+        <Form
+          setShowForm={setShowForm}
+          setShowSpinner={setShowSpinner}
+          setShowSuccess={setShowSuccess}
+          setShowError={setShowError}
+          setTaskNumber={setTaskNumber}
+        />
+      ) : null}
       {showSpinner ? <Spinner /> : null}
       {showSuccess ? <MsgSuccess taskNumber={taskNumber} /> : null}
       {showError ? <MsgError /> : null}

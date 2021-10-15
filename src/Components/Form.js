@@ -38,7 +38,13 @@ const schema = yup.object({
     .required("Zgoda jest wymagana"),
 });
 
-const Form = () => {
+const Form = ({
+  setShowForm,
+  setShowSpinner,
+  setShowSuccess,
+  setShowError,
+  setTaskNumber,
+}) => {
   const {
     register,
     formState: { errors },
@@ -121,6 +127,9 @@ const Form = () => {
   });
 
   const onSubmit = (data) => {
+    setShowForm(false);
+    setShowSpinner(true);
+
     const products = data.products.map((product, index) => {
       return `
       <h5>Produkt ${index + 1}</h5>
@@ -163,8 +172,6 @@ const Form = () => {
       status: 2,
     };
 
-    console.log("body", body);
-
     fetch(url, {
       method: "POST",
       headers: {
@@ -176,17 +183,17 @@ const Form = () => {
       .then((resp) => resp.json())
       .then(function (data) {
         if (data.id) {
-          // setShowSpinner(false);
-          // setShowSuccess(true);
-          // setTaskNumber(data.id);
+          setShowSpinner(false);
+          setShowSuccess(true);
+          setTaskNumber(data.id);
         } else {
-          // setShowSpinner(false);
-          // setShowError(true);
+          setShowSpinner(false);
+          setShowError(true);
         }
       })
       .catch(function (error) {
-        // setShowSpinner(false);
-        // setShowError(true);
+        setShowSpinner(false);
+        setShowError(true);
         console.log(error);
       });
   };
@@ -366,7 +373,7 @@ const Form = () => {
             <label htmlFor="anotherReason" className="form-label">
               Podaj powód:
               <input
-                type="number"
+                type="text"
                 className="form-field"
                 id="anotherReason"
                 name="anotherReason"
